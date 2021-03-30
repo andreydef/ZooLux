@@ -24,7 +24,6 @@ namespace ZooLux.Models.ViewModels.Account
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
-
         [Required]
         [DisplayName("Last Name")]
         public string LastName { get; set; }

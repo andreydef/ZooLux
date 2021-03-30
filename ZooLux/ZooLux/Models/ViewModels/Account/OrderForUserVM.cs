@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace ZooLux.Models.ViewModels.Account
 {
     public class OrderForUserVM
