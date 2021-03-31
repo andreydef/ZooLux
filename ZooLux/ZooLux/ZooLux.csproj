@@ -125,6 +125,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data\BrandsDTO.cs" />
+    <Compile Include="Models\Data\CategoryDTO.cs" />
+    <Compile Include="Models\Data\Db.cs" />
+    <Compile Include="Models\Data\OrderDetailsDTO.cs" />
+    <Compile Include="Models\Data\OrderDTO.cs" />
+    <Compile Include="Models\Data\PagesDTO.cs" />
+    <Compile Include="Models\Data\ProductDTO.cs" />
+    <Compile Include="Models\Data\RoleDTO.cs" />
+    <Compile Include="Models\Data\UserDTO.cs" />
+    <Compile Include="Models\Data\UserRoleDTO.cs" />
+    <Compile Include="Models\ViewModels\Account\LoginUserVM.cs" />
+    <Compile Include="Models\ViewModels\Account\OrderForUserVM.cs" />
+    <Compile Include="Models\ViewModels\Account\UserNavPartialVM.cs" />
+    <Compile Include="Models\ViewModels\Account\UserVM.cs" />
+    <Compile Include="Models\ViewModels\Cart\CartVM.cs" />
+    <Compile Include="Models\ViewModels\Pages\PageVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\BrandsVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\CategoriesVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\OrderVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\ProductVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +184,8 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\AddPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -272,8 +294,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\Data\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
