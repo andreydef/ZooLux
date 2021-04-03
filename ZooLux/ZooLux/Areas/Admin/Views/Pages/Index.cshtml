@@ -13,40 +13,65 @@
     </div>
 }
 
-<p>
+<a>
     @Html.ActionLink("Create New Page", "AddPage", "", new { @class = "btn btn-success" })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Slug
-        </th>
-        <th>
-            Body
-        </th>
-        <th></th>
-    </tr>
+</a>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditPage", new { id = item.Id }) |
-                @Html.ActionLink("Details", "PageDetails", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeletePage", new { id = item.Id })
-            </td>
+@if (!Model.Any())
+{
+    <h1 class="text-center">There are no pages</h1>
+}
+else
+{
+    <!-- Add class sorting and id -->
+    <table class="table sorting" id="pages">
+        <tr class="home">
+            <th>
+                Title
+            </th>
+            <th>
+                Slug
+            </th>
+            <th>
+                Body
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <!-- Change for javascript take in this area -->
+            <tr id="id_@item.Id" class="@item.Slug">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <td>
+                    @Html.Raw(item.Body)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditPage", new { id = item.Id }) |
+                    <!-- If Slug = home, don't show the button delete -->
+                    @if (item.Slug != "home")
+                    {
+                        @Html.ActionLink("Delete", "DeletePage", new { id = item.Id }, new { @class = "delete" })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@section Scripts 
+{
+    <script >
+        /* Confirm page deletion */
+        $("a.delete").click(function () {
+            if (!confirm("Confirm page deletion")) {
+                return false;
+            }
+        });
+    </script>
+}
