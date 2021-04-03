@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -145,5 +145,20 @@ namespace ZooLux.Areas.Admin.Controllers
         }
 
         #endregion
+
+        // GET: Admin/Shop/DeletePage/id
+        [HttpGet]
+        public ActionResult DeletePage(int id)
+        {
+            using (Db db = new Db())
+            {
+                PagesDTO dto = db.Pages.Find(id);
+                db.Pages.Remove(dto);
+                db.SaveChanges();
+            }
+            TempData["SM"] = "You have deleted a page!";
+
+            return RedirectToAction("Index");
+        }
     }
 }

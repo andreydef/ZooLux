@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
@@ -932,55 +932,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Pages\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Pages\AddPage.cshtml" />
     <Content Include="Areas\Admin\Views\Pages\EditPage.cshtml" />
-    <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
-    <Content Include="Scripts\ckeditor\README.md" />
-    <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
-    <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Scripts\ckeditor\plugins\scayt\README.md" />
-    <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Scripts\ckeditor\plugins\scayt\CHANGELOG.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\wrongendpoint.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\tokenwithouturl.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\tokentwoeditorswrong.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\tokentwoeditorscorrect.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\tokenfetching.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\stylesheets.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\readonly.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\paperformat.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\notificationsasync.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\notifications.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\integrations\easyimage.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\integration.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\emptyeditor.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\tests\manual\configfilename.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\README.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\LICENSE.md" />
-    <Content Include="Scripts\ckeditor\plugins\exportpdf\CHANGELOG.md" />
-    <Content Include="Scripts\ckeditor\package.json" />
-    <Content Include="Scripts\ckeditor\LICENSE.md" />
-    <Content Include="Scripts\ckeditor\CHANGES.md" />
-    <Content Include="fileman\asp_net\main.ashx" />
-    <Content Include="fileman\conf.json" />
-    <Content Include="fileman\lang\bg.json" />
-    <Content Include="fileman\lang\ca.json" />
-    <Content Include="fileman\lang\cs.json" />
-    <Content Include="fileman\lang\cs1.json" />
-    <Content Include="fileman\lang\da.json" />
-    <Content Include="fileman\lang\de.json" />
-    <Content Include="fileman\lang\en.json" />
-    <Content Include="fileman\lang\es.json" />
-    <Content Include="fileman\lang\fr.json" />
-    <Content Include="fileman\lang\hu.json" />
-    <Content Include="fileman\lang\it.json" />
-    <Content Include="fileman\lang\nl.json" />
-    <Content Include="fileman\lang\pl.json" />
-    <Content Include="fileman\lang\pt.json" />
-    <Content Include="fileman\lang\ru.json" />
-    <Content Include="fileman\lang\sk.json" />
-    <Content Include="fileman\lang\tr.json" />
-    <Content Include="fileman\web.config" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
