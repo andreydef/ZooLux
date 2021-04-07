@@ -1,7 +1,6 @@
 language: csharp
 mono: none
-dotnet: 2.2
 solution: ZooLux.sln
+dotnet: 2.2
 script:
-  - dotnet restore
-  - dotnet test
+  - msbuild /p:Configuration=Release ZooLux.sln
