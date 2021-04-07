@@ -1,0 +1,7 @@
+language: csharp
+mono: none
+dotnet: 4.0
+solution: ZooLux.sln
+script:
+  - dotnet restore
+  - dotnet test

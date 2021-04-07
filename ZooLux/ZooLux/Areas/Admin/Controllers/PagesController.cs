@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +21,8 @@ namespace ZooLux.Areas.Admin.Controllers
             }
             return View(pageList);
         }
+
+        #region AddPage 
 
         // GET: Admin/Shop/AddPage
         [HttpGet]
@@ -73,6 +75,88 @@ namespace ZooLux.Areas.Admin.Controllers
                 id = page.Id;
             }
             TempData["SM"] = "You have added a page!";
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region EditPage
+
+        // GET: Admin/Shop/EditPage/id
+        [HttpGet]
+        public ActionResult EditPage(int id)
+        {
+            PageVM model;
+
+            using (Db db = new Db())
+            {
+                PagesDTO dto = db.Pages.Find(id);
+
+                if (dto == null)
+                {
+                    return Content("That page does not exist!");
+                }
+                model = new PageVM(dto);
+                model.Pages = new SelectList(db.Pages.ToList(), "Id", "Title");
+            }
+            return View(model);
+        }
+
+        // POST: Admin/Shop/EditPage
+        [HttpPost]
+        public ActionResult EditPage(PageVM model, HttpPostedFileBase file)
+        {
+            int id = model.Id;
+
+            using (Db db = new Db())
+            {
+                model.Pages = new SelectList(db.Pages.ToList(), "Id", "Name");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (Db db = new Db())
+            {
+                if (db.Pages.Where(x => x.Id != id).Any(x => x.Title == model.Title))
+                {
+                    ModelState.AddModelError("", "That page name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Update page
+            using (Db db = new Db())
+            {
+                PagesDTO dto = db.Pages.Find(id);
+
+                dto.Title = model.Title;
+                dto.Slug = model.Slug;
+                dto.Body = model.Body;
+
+                db.SaveChanges();
+            }
+            TempData["SM"] = "You have edited the page!";
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        // GET: Admin/Shop/DeletePage/id
+        [HttpGet]
+        public ActionResult DeletePage(int id)
+        {
+            using (Db db = new Db())
+            {
+                PagesDTO dto = db.Pages.Find(id);
+                db.Pages.Remove(dto);
+                db.SaveChanges();
+            }
+            TempData["SM"] = "You have deleted a page!";
 
             return RedirectToAction("Index");
         }
