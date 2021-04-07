@@ -3,7 +3,6 @@ mono: none
 solution: ZooLux.sln
 dotnet: 2.2
 install:
-  - nuget restore ZooLux.sln
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release ZooLux.sln
