@@ -1,4 +1,7 @@
-language: csharp
-mono: none
-solution: ZooLux.sln
+language: csharp 
+sudo: required 
+mono: none 
 dotnet: 2.2
+script: 
+- dotnet build ".\ZooLux\ZooLux.sln" -c Release 
+- dotnet test ".\ZooLux\ZooLux.sln" -c Release -v n
