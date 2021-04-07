@@ -9,6 +9,10 @@ namespace ZooLux
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            // Connect new library jQuery.UI (js)
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui.js*"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -20,7 +24,12 @@ namespace ZooLux
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/jquery-ui.css")); // Connect new library jQuery.UI (css)
+
+            // Connect new library CKEditor
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/ckeditor/ckeditor.js*"));
         }
     }
 }
