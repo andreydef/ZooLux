@@ -4,4 +4,3 @@ dotnet: 2.2
 solution: ZooLux.sln
 script:
   - dotnet restore
-  - dotnet test
