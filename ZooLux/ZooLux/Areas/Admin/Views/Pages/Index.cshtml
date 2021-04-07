@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ZooLux.Models.ViewModels.Pages.PageVM>
+@model IEnumerable<ZooLux.Models.ViewModels.Pages.PageVM>
 
 @{
     ViewBag.Title = "Pages";
@@ -66,12 +66,5 @@ else
 
 @section Scripts 
 {
-    <script >
-        /* Confirm page deletion */
-        $("a.delete").click(function () {
-            if (!confirm("Confirm page deletion")) {
-                return false;
-            }
-        });
-    </script>
+    <script src="~/Content/ShopJS/PagesIndexViewJS.js"></script>
 }
