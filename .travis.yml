@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 4.0
+dotnet: 4.6
 solution: ZooLux.sln
 script:
   - dotnet restore
