@@ -30,7 +30,7 @@ namespace ZooLux.Models.ViewModels.Shop
         [Required]
         public string Slug { get; set; }
 
-        [AllowHtml]
+        [Required]
         public string Description { get; set; }
 
         public decimal Price { get; set; }
