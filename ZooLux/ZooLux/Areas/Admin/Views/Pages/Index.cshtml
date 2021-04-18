@@ -4,7 +4,7 @@
     ViewBag.Title = "Pages";
 }
 
-<h2>Pages</h2>
+<h2 style="margin-top: 20px; margin-bottom: 20px">Pages</h2>
 
 @if (TempData["SM"] != null)
 {
@@ -14,7 +14,7 @@
 }
 
 <a>
-    @Html.ActionLink("Create New Page", "AddPage", "", new { @class = "btn btn-success" })
+    @Html.ActionLink("Create New Page", "AddPage", "", new { @class = "btn btn-success", @style = "margin-bottom: 20px" })
 </a>
 
 @if (!Model.Any())
