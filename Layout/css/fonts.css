@@ -2,8 +2,3 @@
     font-family:"Rise";
     src: url("../assets/fonts/Rise.ttf") format("truetype");
 }
-
-@font-face {
-    font-family:"Alient League";
-    src: url("../assets/fonts/Alien_League.ttf") format("truetype");
-}
