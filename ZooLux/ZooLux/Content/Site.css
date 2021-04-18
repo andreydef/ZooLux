@@ -1,6 +1,5 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.main {
+    margin-top: 80px;
 }
 
 .body-content {
@@ -13,9 +12,12 @@
 }
 
 input,
-select,
 textarea {
     max-width: 280px;
+}
+
+select {
+    max-width: 100px;
 }
 
 .new-cat {
@@ -25,4 +27,8 @@ textarea {
 
 .ajax-text {
     display: none;
-} 
+}
+
+.main {
+    margin-top: 70px;
+}

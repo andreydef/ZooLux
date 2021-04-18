@@ -9,10 +9,10 @@
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-<h2 style="margin-top: 20px; margin-bottom: 20px">Products</h2>
+<h2 style="margin-bottom: 20px">Products</h2>
 
 <select id="SelectCategory" name="SelectCategory">
-    <option value="0">All</option>
+    <option value="0" style="width: 50px">All</option>
     @foreach (var item in ViewBag.Categories)
     {
         if (ViewBag.SelectedCat == item.Value)
