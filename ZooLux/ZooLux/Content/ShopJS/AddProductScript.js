@@ -1,5 +1,5 @@
-﻿// Script to preview the images
-$(function () {
+﻿$(function () {
+
     /* Preview selected image */
     function readUrl(input) {
         if (input.files && input.files[0]) {
@@ -11,6 +11,7 @@ $(function () {
                     .width(200)
                     .height(200);
             }
+
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -19,4 +20,4 @@ $(function () {
     $("#imageUpload").change(function () {
         readUrl(this);
     });
-}); 
+});

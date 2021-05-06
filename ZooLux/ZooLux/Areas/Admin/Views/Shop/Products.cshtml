@@ -8,83 +8,134 @@
 @using PagedList;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 
-<h2 style="margin-bottom: 20px">Products</h2>
-
-<select id="SelectCategory" name="SelectCategory">
-    <option value="0" style="width: 50px">All</option>
-    @foreach (var item in ViewBag.Categories)
-    {
-        if (ViewBag.SelectedCat == item.Value)
-        {
-            <option selected="selected" value="@item.Value">@item.Text</option>
-            // Value - id, Text - Name of Category
-        }
-        else
-        {
-            <option value="@item.Value">@item.Text</option>
-        }
-    }
-</select>
-<br />
-<br />
-
-<p>
-    @Html.ActionLink("Add new product", "AddProduct", "", new { @class = "btn btn-success" })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            ImageName
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var product in ViewBag.onePageOfProducts)
-    {
-        <tr>
-            <td>
-                @product.Name
-            </td>
-            <td>
-                @product.Description
-            </td>
-            <td>
-                @product.Price
-            </td>
-            <td>
-                <a href="/admin/shop/EditProduct/@product.Id">
-                    @if (@product.ImageName == null)
-                    {
-                        <img src="/Content/img/no_image.png" />
-                    }
-                    else
-                    {
-                        <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
-                    }
-                </a>
-            </td>
-
-            <td>
-                @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteProduct", new { id = product.Id }, new { @class = "btn btn-danger delete" })
-            </td>
-        </tr>
-    }
-</table>
-
-@Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+<div class="container">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="min_content_fix">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12">
+                        <div class="wrap_heading">
+                            <div style="margin-top: 50px" class="box_heading heading_page">Товари</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <select id="SelectCategory" name="SelectCategory" style="margin-left: 18px; margin-bottom: 10px">
+                        <option value="0">All</option>
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            if (ViewBag.SelectedCat == item.Value)
+                            {
+                                <option selected="selected" value="@item.Value">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                    <a class="btn btn_small btn-info" href="~/admin/shop/AddProduct" style="margin-left: 10px; margin-bottom: 10px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="20px" height="20px"><path d="m23,10h-8.5c-0.3,0-0.5-0.2-0.5-0.5v-8.5c0-0.6-0.4-1-1-1h-2c-0.6,0-1,0.4-1,1v8.5c0,0.3-0.2,0.5-0.5,0.5h-8.5c-0.6,0-1,0.4-1,1v2c0,0.6 0.4,1 1,1h8.5c0.3,0 0.5,0.2 0.5,0.5v8.5c0,0.6 0.4,1 1,1h2c0.6,0 1-0.4 1-1v-8.5c0-0.3 0.2-0.5 0.5-0.5h8.5c0.6,0 1-0.4 1-1v-2c0-0.6-0.4-1-1-1z" fill="currentColor"></path></svg>
+                        <span>Додати товар</span>
+                    </a>
+                </div>
+                <div class="boxed fn_toggle_wrap">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="contrast_list products_list fn_sort_list" style="min-height: 300px;">
+                                <div class="fn_step_sorting contrast_list_head">
+                                    <div class="contrast_list_boding contrast_list_drag"></div>
+                                    <div class="contrast_list_heading contrast_list_check">
+                                        <input class="hidden_check fn_check_all" type="checkbox" id="check_all_1" name="" value="">
+                                        <label class="contrast_checkbox" for="check_all_1"></label>
+                                    </div>
+                                    <div class="contrast_list_heading contrast_list_photo">
+                                        Photo
+                                    </div>
+                                    <div class="contrast_list_heading contrast_list_name" style="margin-left: 20px;">
+                                        Name
+                                    </div>
+                                    <div class="contrast_list_heading contrast_list_price" style="position: relative; left: 90px;">
+                                        Price
+                                    </div>
+                                    <div class="contrast_list_heading contrast_list_setting contrast_list_products_setting" style="position: relative; left: 30px;">
+                                        <a href="#" class="settings_a">Дії</a>
+                                    </div>
+                                    <div class="contrast_list_heading contrast_list_close"></div>
+                                </div>
+                                <table class="fn_form_list fn_fast_button">
+                                    <tr>
+                                        @if (!Model.Any())
+                                        {
+                                            <h1 class="text-center"> There are no products. </h1>
+                                        }
+                                        else
+                                        {
+                                            foreach (var product in ViewBag.onePageOfProducts)
+                                            {
+                                                <div class="fn_step-1 fn_row contrast_list_body_item fn_sort_item">
+                                                    <div class="contrast_list_row">
+                                                        <input type="hidden" name="positions[@product.Id]" value="@product.Id">
+                                                        <div class="contrast_list_boding contrast_list_drag move_zone ui-sortable-handle">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="20px" height="20px"><polygon points="18,20 18,26 22,26 16,32 10,26 14,26 14,20    " fill="currentColor"></polygon><polygon points="14,12 14,6 10,6 16,0 22,6 18,6 18,12    " fill="currentColor"></polygon></svg>
+                                                        </div>
+                                                        <div class="contrast_list_boding contrast_list_check">
+                                                            <input class="hidden_check" type="checkbox" id="@product.Id" name="check[]" value="@product.Id">
+                                                            <label class="contrast_checkbox" for="@product.Id"></label>
+                                                        </div>
+                                                        <div class="contrast_list_boding contrast_list_photo">
+                                                            <a href="/admin/shop/EditProduct/@product.Id">
+                                                                @if (@product.ImageName == null)
+                                                                {
+                                                                    <img src="/Content/img/no_image.png" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                        <div class="contrast_list_boding contrast_list_categories_name" style="margin-left: 25px;">
+                                                            <a href="/admin/shop/EditProduct/@product.Id">
+                                                                @product.Name
+                                                            </a>
+                                                        </div>
+                                                        <div class="contrast_list_boding contrast_list_price">
+                                                            <div class="input-group">
+                                                                <input class="form-control " type="text" name="price[@product.Price]" value="@product.Price">
+                                                                <span class="input-group-addon">$</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="contrast_list_boding contrast_list_close btn_close fn_remove hint-bottom-right-t-info-s-small-mobile hint-anim delete" style="position: relative; left: 52px;">
+                                                            @Html.ActionLink("Delete", "DeleteProduct", "Shop", new { id = product.Id }, FormMethod.Get)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        <div class="pagination-container">
+                                            @Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer id="footer">
+                    <div class="col-md-12 font_12 text_white">
+                        <a href="/admin/dashboard/">ZooLux</a>
+                        © 2020 v.1.0.0 | Ви ввійшли як Admin
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts
 {
     <script src="~/Content/ShopJS/ProductsScript.js"></script>
-} 
+}
