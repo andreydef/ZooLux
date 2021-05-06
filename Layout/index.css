@@ -16,7 +16,7 @@ body {
     position: absolute;
     width: 200px;
     height: 47px;
-    left: 20%;
+    left: 15%;
     top: 0px;
     background: #6C6666;
     border-radius: 0px 0px 10px 10px;
@@ -88,21 +88,15 @@ header .deliter {
     position: relative;
     width: 164px;
     height: 40px;
-    left: 277px;
+    left: 400px;
     top: 25px;
-    font-family: Alien League;
+    font-family: Rise;
     font-style: italic;
     font-weight: 200;
-    font-size: 36px;
+    font-size: 25px;
     line-height: 39px;
     color: #000000;
 }
-
-
-
-
-
-
 
 footer .deliter {
     width: 100%;
@@ -110,4 +104,46 @@ footer .deliter {
     left: 0px;
     top: 0;
     background: #C4C4C4;
+}
+
+.category_items {
+    position: absolute;
+    width: 95px;
+    height: 33px;
+    left: 450px;
+    margin-top: 30px;
+    font-family: Rise;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 33px;
+    color: #6C6666;
+}
+
+.logo_footer {
+    position: sticky;
+    width: 206px;
+    height: 206px;
+    left: 50%;
+    top: -62px;
+    background-image: url("./assets/images/logo_header.png");
+    background-repeat: no-repeat;
+}
+
+.pages_items {
+    position: absolute;
+    width: 95px;
+    height: 33px;
+    right: 400px;
+    top: 300px;
+    margin-top: 30px;
+    font-family: Rise;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 33px;
+}
+
+.page_item {
+    color: #006291;
 }

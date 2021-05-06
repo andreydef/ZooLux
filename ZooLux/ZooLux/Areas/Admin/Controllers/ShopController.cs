@@ -88,6 +88,30 @@ namespace ZooLux.Areas.Admin.Controllers
 
         #region Products
 
+        // GET: Admin/Shop/Products
+        [HttpGet]
+        public ActionResult Products(int? page, int? catId)
+        {
+            List<ProductVM> listOfProductVM;
+
+            var pageNumber = page ?? 1;
+
+            using (Db db = new Db())
+            {
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                ViewBag.SelectedCat = catId.ToString();
+            }
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 4); // the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            return View(listOfProductVM);
+        }
+
         // GET: Admin/Shop/AddProduct
         [HttpGet]
         public ActionResult AddProduct()
@@ -98,6 +122,7 @@ namespace ZooLux.Areas.Admin.Controllers
             {
                 model.Categories = new SelectList(db.Categories.ToList(), "id", "Name");
             }
+
             return View(model);
         }
 
@@ -114,7 +139,6 @@ namespace ZooLux.Areas.Admin.Controllers
                 }
             }
 
-            // Check the product name for unicity
             using (Db db = new Db())
             {
                 if (db.Products.Any(x => x.Name == model.Name))
@@ -124,8 +148,8 @@ namespace ZooLux.Areas.Admin.Controllers
                     return View(model);
                 }
             }
-
             int id;
+
             using (Db db = new Db())
             {
                 ProductDTO product = new ProductDTO();
@@ -144,6 +168,7 @@ namespace ZooLux.Areas.Admin.Controllers
 
                 id = product.Id;
             }
+
             TempData["SM"] = "You have added a product!";
 
             #region Upload Image
@@ -195,7 +220,7 @@ namespace ZooLux.Areas.Admin.Controllers
                     ext != "image/svg" &&
                     ext != "image/bmp" &&
                     ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
-                    ext != "image/webp")
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
                 {
                     using (Db db = new Db())
                     {
@@ -205,7 +230,10 @@ namespace ZooLux.Areas.Admin.Controllers
                     }
                 }
 
+                // Assign variable with name of image
                 string imageName = file.FileName;
+
+                // Save the name of image in model DTO
                 using (Db db = new Db())
                 {
                     ProductDTO dto = db.Products.Find(id);
@@ -213,12 +241,8 @@ namespace ZooLux.Areas.Admin.Controllers
 
                     db.SaveChanges();
                 }
-
-                // Assign paths to the original and reduced image
                 var path = string.Format($"{pathString2}\\{imageName}");
                 var path2 = string.Format($"{pathString3}\\{imageName}");
-
-                // Save original image
                 file.SaveAs(path);
 
                 // Create and save reduced copy of image
@@ -229,31 +253,6 @@ namespace ZooLux.Areas.Admin.Controllers
             #endregion
 
             return RedirectToAction("AddProduct");
-        }
-
-        // GET: Admin/Shop/Products
-        [HttpGet]
-        public ActionResult Products(int? page, int? catId)
-        {
-            List<ProductVM> listOfProductVM;
-            var pageNumber = page ?? 1;
-
-            using (Db db = new Db())
-            {
-                listOfProductVM = db.Products.ToArray()
-                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
-                    .Select(x => new ProductVM(x))
-                    .ToList();
-
-                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-                ViewBag.SelectedCat = catId.ToString();
-            }
-
-            // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
-            ViewBag.onePageOfProducts = onePageOfProducts;
-
-            return View(listOfProductVM);
         }
 
         // GET: Admin/Shop/EditProduct/id
@@ -326,6 +325,7 @@ namespace ZooLux.Areas.Admin.Controllers
 
                 db.SaveChanges();
             }
+
             TempData["SM"] = "You have edited the product!";
 
             #region Image Upload
@@ -352,7 +352,7 @@ namespace ZooLux.Areas.Admin.Controllers
                     ext != "image/svg" &&
                     ext != "image/bmp" &&
                     ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
-                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used)
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
                 {
                     using (Db db = new Db())
                     {
@@ -409,11 +409,10 @@ namespace ZooLux.Areas.Admin.Controllers
             return RedirectToAction("EditProduct");
         }
 
-        // POST: Admin/Shop/DeleteProduct/id
-        [HttpPost]
+        // GET: Admin/Shop/DeleteProduct/id
+        [HttpGet]
         public ActionResult DeleteProduct(int id)
         {
-            // Delete product from database 
             using (Db db = new Db())
             {
                 ProductDTO dto = db.Products.Find(id);
@@ -421,7 +420,6 @@ namespace ZooLux.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
-            // Delete the directories of product (images)
             var originalDirectory = new DirectoryInfo(string.Format($"{Server.MapPath(@"\")}Images\\Uploads"));
             var pathString = Path.Combine(originalDirectory.ToString(), "Products\\" + id.ToString());
 
@@ -435,20 +433,17 @@ namespace ZooLux.Areas.Admin.Controllers
         [HttpPost]
         public void SaveGalleryImages(int id)
         {
-            // Sort all getting files
             foreach (string fileName in Request.Files)
             {
                 HttpPostedFileBase file = Request.Files[fileName];
 
                 if (file != null && file.ContentLength > 0)
                 {
-                    // Assign all paths to directories
                     var originalDirectory = new DirectoryInfo(string.Format($"{Server.MapPath(@"\")}Images\\Uploads"));
 
                     string pathString1 = Path.Combine(originalDirectory.ToString(), "Products\\" + id.ToString() + "\\Gallery");
                     string pathString2 = Path.Combine(originalDirectory.ToString(), "Products\\" + id.ToString() + "\\Gallery\\Thumbs");
 
-                    // Assign paths of images
                     var path = string.Format($"{pathString1}\\{file.FileName}");
                     var path2 = string.Format($"{pathString2}\\{file.FileName}");
 
