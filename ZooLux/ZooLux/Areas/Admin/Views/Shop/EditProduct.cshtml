@@ -1,0 +1,182 @@
+﻿@model ZooLux.Models.ViewModels.Shop.ProductVM
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
+<link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />
+
+<h2 style="margin-top: 20px;">Edit Product</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+@using (Html.BeginForm("EditProduct", "Shop", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="page-container" style="overflow: hidden;">
+        @if (TempData["SM"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SM"]
+            </div>
+        }
+        <div class="main">
+            <div class="container-fluid">
+                <div class="min_content_fix">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 float-xs-right">
+                            <form method="post" enctype="multipart/form-data" class="fn_fast_button">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="boxed match_matchHeight_true">
+                                            <div class="row d_flex">
+                                                <div class="col-lg-6 col-md-7 col-sm-9">
+                                                    <div class="fn_step-1">
+                                                        <div class="heading_label heading_label--required">
+                                                            <span>Назва</span>
+                                                        </div>
+                                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-5 col-sm-3">
+                                                    <div class="fn_step-1">
+                                                        <div class="heading_label heading_label--required">
+                                                            <span>Короткий опис</span>
+                                                        </div>
+                                                        @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="file" , name="file" id="imageUpload" />
+                                            <img id="imgpreview" src="~/Content/img/no_image.png" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select Category", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="fn_step-6 boxed match fn_toggle_wrap tabs" style="height: 400px;">
+                                            <div class="heading_tabs">
+                                                <div class="tab_navigation">
+                                                    <a href="#tab1" class="tab_navigation_link">Опис</a>
+                                                </div>
+                                                <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                                                    <a class="btn-minimize" href="javascript:;"><i class="icon-arrow-down"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="toggle_body_wrap on fn_card">
+                                                <div class="tab_container">
+                                                    <div id="tab1" class="tab" style="display: block;">
+                                                        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group">
+                                <div class="col-md-2 col-md-10" style="position: relative; top: 20px;">
+                                    <input type="submit" value="Edit Product" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        @if (!Model.GalleryImages.Any())
+        {
+            <h6>There are no gallery images for this product.</h6>
+        }
+
+        <form action="/admin/shop/SaveGalleryImages/" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 100px; height: 100px;">
+            <div class="fallback">
+                <input type="file" name="file" multiple="" />
+                <input type="submit" value="Upload" />
+            </div>
+        </form>
+
+        <div class="row">
+            @foreach (var image in Model.GalleryImages)
+            {
+                <div class="col">
+                    <div class="col">
+                        <div style="width: 200px; height: 200px; text-align: center">
+                            <img src="/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@image" />
+                            @Html.ActionLink("Delete", "DeleteImage", "Shop", new { @class = "deleteimage btn btn-danger", data_name = image, style = "margin: 10px;" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script>CKEDITOR.replace("Description");</script>
+    <script src="~/Content/ShopJS/AddProductScript.js"></script>
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
+
+    <script>
+        /* Dropzone js*/
+        Dropzone.options.dropzoneForm = {
+            acceptedFiles: "image/*",
+            init: function () {
+                this.on("complete",
+                    function (file) {
+                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                            location.reload();
+                        }
+                    });
+                this.on("sending",
+                    function (formData) {
+                        formData.append("id",  @Model.Id);
+                    });
+            }
+        };
+
+        /* Delete gallery image */
+        $("a.deleteimage").click(function(e) {
+            e.preventDefault();
+            if (!confirm("Confirm deletion")) return false;
+            var $this = $(this);
+            var url = "/admin/shop/DeleteImage";
+            var imageName = $this.data("name");
+            $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
+                $this.parent().parent().parent().fadeOut("slow");
+            });
+        });
+    </script>
+}
