@@ -1,4 +1,4 @@
-﻿@model ZooLux.Models.ViewModels.Shop.ProductVM
+@model ZooLux.Models.ViewModels.Shop.ProductVM
 
 @{
     ViewBag.Title = "Edit Product";
@@ -141,42 +141,4 @@
             }
         </div>
     </div>
-}
-
-@section Scripts
-{
-    <script>CKEDITOR.replace("Description");</script>
-    <script src="~/Content/ShopJS/AddProductScript.js"></script>
-    <script src="~/Scripts/dropzone/dropzone.js"></script>
-
-    <script>
-        /* Dropzone js*/
-        Dropzone.options.dropzoneForm = {
-            acceptedFiles: "image/*",
-            init: function () {
-                this.on("complete",
-                    function (file) {
-                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                            location.reload();
-                        }
-                    });
-                this.on("sending",
-                    function (formData) {
-                        formData.append("id",  @Model.Id);
-                    });
-            }
-        };
-
-        /* Delete gallery image */
-        $("a.deleteimage").click(function(e) {
-            e.preventDefault();
-            if (!confirm("Confirm deletion")) return false;
-            var $this = $(this);
-            var url = "/admin/shop/DeleteImage";
-            var imageName = $this.data("name");
-            $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
-                $this.parent().parent().parent().fadeOut("slow");
-            });
-        });
-    </script>
 }
