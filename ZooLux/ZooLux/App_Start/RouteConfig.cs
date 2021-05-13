@@ -9,11 +9,16 @@ namespace ZooLux
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            routes.MapRoute("Default", "",
+                new { controller = "Pages", action = "Index" },
+                new[] { "ZooLux.Controllers" });
+
+            routes.MapRoute("Pages", "{page}", 
+                new { controller = "Pages", action = "Index" },
+                new[] { "ZooLux.Controllers" });
+
+            routes.MapRoute("Account", "Account/{action}/{id}", new { controller = "Account", action = "Index", id = UrlParameter.Optional },
+                new[] { "ZooLux.Controllers" });
         }
     }
 }
