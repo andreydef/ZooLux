@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Account.OrderForUserVM>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = null;
+}
+
+<title>Contrast | Orders</title>
+
+@Html.Partial("~/Views/_Styles.cshtml")
+
+@Html.Partial("_Header")
+
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- CATEGORY-MENU-LIST START -->
+                <div class="left-category-menu hidden-sm hidden-xs">
+                    <div class="left-product-cat">
+                        <div class="category-heading">
+                            <h2>categories</h2>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul>
+                                <li>
+                                    @Html.Action("CategoryMenuPartial", "Shop")
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CATEGORY-MENU-LIST -->
+            </div>
+            <div class="col-md-9">
+                <!-- entry-header-area start -->
+                <div class="entry-header-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="entry-header">
+                                <h2 class="entry-title">My Orders</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- entry-header-area end -->
+                <!-- Start Orders Area -->
+                <div class="checkout-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (!Model.Any())
+                            {
+                                <h2 class="text-center">You have no orders.</h2>
+                            }
+                            else
+                            {
+                                <table class="table table-bordered">
+                                    @foreach (var item in Model)
+                                    {
+                                        <thead>
+                                            <tr>
+                                                <th>OrderNumber</th>
+                                                <th>UserName</th>
+                                                <th>Order Details</th>
+                                                <th>Created At</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">
+                                                    @Html.DisplayFor(modelItem => item.OrderNumber)
+                                                </td>
+                                                <td class="text-left">
+                                                    @Html.DisplayFor(modelItem => item.UserName)
+                                                </td>
+                                                <td class="text-left">
+                                                    <div class="btn-block cart-put">
+                                                        @foreach (var item2 in item.ProductsAndQty)
+                                                        {
+                                                            @item2.Key @:x @item2.Value <br />
+                                                        }
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.Total)$
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- End Orders Area -->
+            </div>
+        </div>
+    </div>
+    <!-- START SUBSCRIBE-AREA -->
+    <div class="subscribe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                    <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                    <div class="subscribe">
+                        <form action="#">
+                            <input type="text" placeholder="Enter Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="social-media">
+                        <a href="#"><i class="fa fa-facebook fb"></i></a>
+                        <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                        <a href="#"><i class="fa fa-twitter tt"></i></a>
+                        <a href="#"><i class="fa fa-youtube yt"></i></a>
+                        <a href="#"><i class="fa fa-linkedin li"></i></a>
+                        <a href="#"><i class="fa fa-rss rs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SUBSCRIBE-AREA -->
+</section>
+
+@Html.Partial("_Footer")
+
+@Html.Partial("~/Views/_Scripts.cshtml")

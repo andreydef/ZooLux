@@ -1,0 +1,127 @@
+﻿<header class="header-area">
+    <div class="header-top hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="top-menu">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <p class="welcome-msg">You already is loggined! </p>
+                        }
+                        else
+                        {
+                            <p class="welcome-msg">Please, login!</p>
+                        }
+                    </div>
+                    <div class="top-link">
+                        <ul class="link">
+                            @if (Request.IsAuthenticated == false)
+                            {
+                                <li><a href="/account/create-account"><i class="fa fa-user"></i>Create Account</a></li>
+                            }
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li><a href="/account/user-profile"><i class="fa fa-user"></i> My Account</a></li>
+                                <li>@Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null)</li>
+                            }
+                            @if (Request.IsAuthenticated && User.IsInRole("User"))
+                            {
+                                <li><a href="/account/user-profile"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="/account/Orders"><i class="fa fa-share"></i>Orders</a></li>
+                            }
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li> @Html.ActionLink("Logout", "Logout", "Account") </li>
+                            }
+                            else
+                            {
+                                if (ViewBag.Title == "Login")
+                                {
+                                    <li>  @Html.ActionLink("Login", "Login", "Account") </li>
+                                }
+                                else
+                                {
+                                    <li> @Html.ActionLink("Login", "Login", "Account") </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="logo">
+                        <a href="/" title="ZooLux"><img src="~/Content/img/logo.png" alt="ZooLux" style="max-width: 150px;"></a>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="quick-access">
+                        <div class="search-by-category">
+                            <div class="header-search">
+                                <form action="#">
+                                    <input type="text" placeholder="Search">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        @if (Request.IsAuthenticated == false || User.IsInRole("User"))
+                        {
+                            <div class="top-cart">
+                                <ul>
+                                    <li>
+                                        <a href="/cart/MainCart">
+                                            <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
+                                            <span class="cart-total">
+                                                <span class="cart-title">shopping cart</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mainmenu hidden-sm hidden-xs">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li><a href="/shop/Products">Products</a></li>
+                                <li><a href="/shop/Brands">Brands</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu-area hidden-md hidden-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav id="mobile-menu" style="display: block;">
+                        <ul>
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li><a href="/shop/Products">Products</a></li>
+                            <li><a href="/shop/Brands">Brands</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | ZooLux</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="/Content/jquery-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="/Content/jquery.fancybox.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Front-end/css/font-awesome.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="navbar-fixed menu-pin">
+    <header class="navbar">
+        <div class="container-fluid">
+            <div id="mobile_menu" class="fn_mobile_menu hidden-xl-up text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 459 459"><path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z" fill="currentColor"></path></svg>
+            </div>
+            <div class="admin_switches">
+                <div class="box_adswitch">
+                    <a class="btn_admin" href="/">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460 460" width="20px" height="20px"><path d="M0,67.5v285h460v-285H0z M30,97.5h400v225H30V97.5z M130,362.5l-20,20v10h240v-10l-20-20H130z" fill="currentColor"></path></svg>
+                        <span>Перейти на сайт</span>
+                    </a>
+                </div>
+            </div>
+            <div class="admin_switches admin_switches_two hidden-sm-down">
+                <div class="box_adswitch"></div>
+            </div>
+            <div id="mobile_menu_right" class="fn_mobile_menu_right hidden-md-up text-white float-xs-right">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" fill="currentColor"><rect x="6.4" y="0" fill="none" width="13.6" height="11.1"></rect><rect y="8.9" width="10.6" height="2.2"></rect><rect x="14.8" y="2.6" width="1.5" height="7.4"></rect><rect x="11.6" y="5.6" width="7.4" height="1.5"></rect><rect y="14.4" width="20" height="2.2"></rect><rect y="3.3" width="6.4" height="2.2"></rect></svg>
+            </div>
+            <div id="quickview" class="fn_quickview">
+                <div class="sidebar_header hidden-md-up">
+                    <span class="fn_switch_quickview menu_switch">
+                        <span class="menu_hamburger"></span>
+                    </span>
+                    <a href="/Admin/Dashboard" class="logo_box">
+                        <img src="~/Content/img/logo.png" alt="logotype" />
+                    </a>
+                </div>
+                <div class="admin_exit hidden-sm-down" style="position: relative; left: 220px;">
+                    <a href="/account/Logout">
+                        <span class="hidden-lg-down">Вихід</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" width="20px" height="20px"><path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341   C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531   c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170   c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z" fill="currentColor"></path><path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100   C140,123.284,146.716,130,155,130z" fill="currentColor"></path></svg>
+                    </a>
+                </div>
+                <div class="admin_exit hidden-md-up">
+                    @Html.ActionLink("Вихід", "Logout", "Account")
+                    <a href="/account/Logout">
+                        <span>Вихід</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" width="20px" height="20px"><path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341   C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531   c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170   c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z" fill="currentColor"></path><path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100   C140,123.284,146.716,130,155,130z" fill="currentColor"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav id="admin_catalog" class="fn_left_menu">
+        <div id="mob_menu"></div>
+        <div class="sidebar_header">
+            <a href="/Admin/Dashboard" class="logo_box">
+                <img src="~/Content/img/logo.png" alt="logotype" style="max-width: 120px" />
+            </a>
+            <span class="fn_switch_menu menu_switch fn_ajax_action fn_active_class hint-left-middle-t-white-s-small-mobile" data-id="1" data-hint="Фіксація каталога">
+                <span class="menu_hamburger"></span>
+            </span>
+        </div>
+        <div class="sidebar sidebar-menu" id="navbarText">
+            <div class="scroll-wrapper scrollbar-inner menu_items" style="position: relative;">
+                <div class="scroll-inner menu_items scroll-content" style="height: 1040px;margin-bottom: 0px; margin-right: 0px; max-height: none;">
+                    <div>
+                        <form class="fn_manager_menu">
+                            <ul id="fn_sort_menu_section" class="menu_items">
+                                <li class="fn_item_sub_switch nav-dropdown" draggable="false">
+                                    <ul class="fn_submenu_toggle submenu fn_sort_menu_item">
+                                        <li>
+                                            <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="ProductsAdmin">
+                                            <a class="fn_learning_ProductsAdmin nav-link" href="~/admin/shop/Products">
+                                                <span class="left_products_title title">Товари</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" name="manager_menu[left_catalog][left_categories_title]" value="CategoriesAdmin">
+                                            <a class="fn_learning_CategoriesAdmin nav-link" href="~/admin/shop/Categories">
+                                                <span class="left_categories_title title">Категорії</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" name="manager_menu[left_catalog][left_brands_title]" value="BrandsAdmin">
+                                            <a class="fn_learning_BrandsAdmin nav-link" href="~/admin/shop/Brands">
+                                                <span class="left_brands_title title">Бренди</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" name="manager_menu[left_catalog][left_pages_title]" value="PagesAdmin">
+                                            <a class="fn_learning_ProductsAdmin nav-link" href="~/admin/shop/Orders">
+                                                <span class="left_products_title title">Замовлення</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/jquery.scrollbar.js")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/jquery.dd.min.js")
+    @Scripts.Render("~/Scripts/jquery.fancybox.min.js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/ckeditor")
+    @Scripts.Render("~/Scripts/main_beckend.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

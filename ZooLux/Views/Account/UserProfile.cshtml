@@ -1,0 +1,162 @@
+﻿@model WebStore_Contrast.Models.ViewModels.Account.UserProfileVM
+
+@{
+    ViewBag.Title = "User Profile";
+    Layout = null;
+}
+
+<title>User Prodile</title>
+@Html.Partial("~/Views/_Styles.cshtml")
+
+@Html.Partial("_Header")
+
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- CATEGORY-MENU-LIST START -->
+                <div class="left-category-menu hidden-sm hidden-xs">
+                    <div class="left-product-cat">
+                        <div class="category-heading">
+                            <h2>categories</h2>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul>
+                                <li>
+                                    @Html.Action("CategoryMenuPartial", "Shop")
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CATEGORY-MENU-LIST -->
+            </div>
+            <div class="col-md-9">
+                <!-- entry-header-area start -->
+                <div class="entry-header-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="entry-header">
+                                <h2 class="entry-title">My Account</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- entry-header-area end -->
+                <!-- Start checkout-area -->
+                <div class="checkout-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Accordion start -->
+                            <div class="panel-group" id="accordion">
+                                <!-- Start Account information -->
+                                <div class="panel panel_default">
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(model => model.Id)
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.EmailAdress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.EmailAdress, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.EmailAdress, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2", @style = "position: relative; right: 20px;" })
+                                                <div class="col-md-10">
+                                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="offset-2 col">
+                                                    <input type="submit" value="Edit Profile" class="btn btn-success" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <!-- End Account information -->
+                            </div>
+                            <!-- Accordion end -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Shopping-Cart -->
+                <!-- My-Account-Area start -->
+                <div class="my-account-area">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- My-Account-Area end -->
+            </div>
+        </div>
+    </div>
+    <!-- START SUBSCRIBE-AREA -->
+    <div class="subscribe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                    <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                    <div class="subscribe">
+                        <form action="#">
+                            <input type="text" placeholder="Enter Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="social-media">
+                        <a href="#"><i class="fa fa-facebook fb"></i></a>
+                        <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                        <a href="#"><i class="fa fa-twitter tt"></i></a>
+                        <a href="#"><i class="fa fa-youtube yt"></i></a>
+                        <a href="#"><i class="fa fa-linkedin li"></i></a>
+                        <a href="#"><i class="fa fa-rss rs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SUBSCRIBE-AREA -->
+</section>
+
+@Html.Partial("_Footer")
+
+@Html.Partial("~/Views/_Scripts.cshtml")

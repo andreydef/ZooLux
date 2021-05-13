@@ -1,0 +1,85 @@
+﻿@model WebStore_Contrast.Models.ViewModels.Account.LoginUserVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<title>ZooLux | Login</title>
+
+@* Add some stylesheet to page Login *@
+@Html.Partial("~/Views/_Styles.cshtml")
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/Front-end/css/main.css">
+
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-33">
+                        Account Login
+                    </span>
+                    <div class="wrap-input100 validate-input">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input100", @placeholder = "Username", @name = "username" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="wrap-input100 rs1 validate-input">
+                        @Html.PasswordFor(model => model.Password, new { @class = "input100", @placeholder = "Password", @name = "password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="container-login100-form-btn m-t-20">
+                        <input type="submit" value="Sign in" class="login100-form-btn" />
+                    </div>
+                    <div class="text-center">
+                        <span class="txt1">
+                            Back to site
+                        </span>
+                        <a href="/" class="txt2 hov1">
+                            ZooLux
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <span class="txt1">
+                            Create an account?
+                        </span>
+                        <a href="/account/create-account" class="txt2 hov1">
+                            Create an account
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+@Html.Partial("~/Views/_Scripts.cshtml")
+
+<script src="~/Front-end/js/jquery-3.2.1.min.js"></script>
+<script src="~/Front-end/js/popper.js"></script>
+<script src="~/Front-end/js/animsition.min.js"></script>
+<script src="~/Front-end/js/select2.min.js"></script>
+<script src="~/Front-end/js/moment.js"></script>
+<script src="~/Front-end/js/daterangepicker.js"></script>
+<script src="~/Front-end/js/countdowntime.js"></script>
+<script src="~/Front-end/js/main.js"></script>

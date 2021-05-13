@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZooLux</title>
+    @Html.Partial("~/Views/_Styles.cshtml")
+</head>
+<body>
+    @Html.Partial("_Header")
+
+    <div class="category-slider-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="left-category-menu hidden-sm hidden-xs">
+                        <div class="left-product-cat">
+                            <div class="category-heading">
+                                <h2>categories</h2>
+                            </div>
+                            <div class="category-menu-list">
+                                <ul>
+                                    <li>
+                                        @Html.Action("CategoryMenuPartial", "Shop")
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div id="slider" class="nivoSlider">
+                        <div class="nivo-caption" style="display: block;">
+                            <div class="slider-progress"></div>
+                            <img src="Front-end/img/sliders/slider-1/bg1.jpg" class="img1" alt="ZooLux" title="#slider-direction-1" style="width: 848px; visibility: hidden;">
+                        </div>
+                        <img src="Front-end/img/sliders/slider-1/bg2.jpg" class="img1" alt="ZooLux" title="#slider-direction-1" style="width: 848px; visibility: hidden;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <!-- START SMALL-PRODUCT-AREA -->
+                        <div class="small-product-area carosel-navigation">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="area-title">
+                                        <h3 class="title-group gfont-1">Bestseller</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="active-bestseller sidebar owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                    <div class="owl-wrapper-outer">
+                                        <div class="owl-wrapper" style="width: 1172px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="owl-item" style="width: 293px;">
+                                                <div class="col-xs-12">
+                                                    <!-- Start Single-Product -->
+                                                    <div class="single-product">
+                                                        @Html.Action("SmallProductMenuPartial", "Shop")
+                                                    </div>
+                                                    <!-- End Single-Product -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SMALL-PRODUCT-AREA -->
+                        <!-- START RECENT-POSTS -->
+                        <div class="shop-blog-area sidebar">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="title-group border-red gfont-1">RECENT POSTS </h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="active-recent-posts carosel-circle owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                    <!-- Start Single-Recent-Posts -->
+                                    <div class="owl-wrapper-outer">
+                                        <div class="owl-wrapper" style="width: 2930px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="owl-item" style="width: 293px;">
+                                                <div class="col-xs-12">
+                                                    <div class="single-recent-posts">
+                                                        <div class="recent-posts-photo">
+                                                            <img src="Front-end/img/posts/1.jpg" alt="Recent Posts">
+                                                        </div>
+                                                        <div class="recent-posts-text">
+                                                            <h5><a href="#" class="recent-posts-title">Test Zoo</a></h5>
+                                                            <span class="recent-posts-date">13/05/2021 | BootExpert Theme</span>
+                                                            <p class="posts-short-brif">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
+                                                            <a href="#" class="posts-read-more">Read more ...</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-controls clickable">
+                                        <div class="owl-pagination">
+                                            <div class="owl-page active">
+                                                <span class=""></span>
+                                            </div>
+                                            <div class="owl-page">
+                                                <span class=""></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END RECENT-POSTS -->
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <!-- START PRODUCT-AREA -->
+                        <div class="product-area">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- Start Product-Menu -->
+                                    <div class="product-menu">
+                                        <div class="product-title">
+                                            <h3 class="title-group-3 gfont-1">Products</h3>
+                                        </div>
+                                    </div>
+                                    <div class="product-filter">
+                                        <ul role="tablist">
+                                            <li role="presentation" class="list active">
+                                                <a href="#display-1-1" role="tab" data-toggle="tab"></a>
+                                            </li>
+                                            <li role="presentation" class="grid ">
+                                                <a href="#display-1-2" role="tab" data-toggle="tab"></a>
+                                            </li>
+                                        </ul>
+                                        <div class="sort">
+                                            <select>
+                                                <option value="#">Default</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- End Product-Menu -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <!-- Start Product -->
+                                    <div class="product">
+                                        <div class="tab-content">
+                                            <!-- Product Start -->
+                                            <div role="tabpanel" class="tab-pane fade in active" id="display-1-1">
+                                                <div class="col-xs-12">
+                                                    <div class="listview">
+                                                        <!-- Start Single-Product -->
+                                                        <div class="single-product">
+                                                            @Html.Action("ProductMenuPartial", "Shop")
+                                                        </div>
+                                                        <!-- End Single-Product -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Product End -->
+                                        </div>
+                                    </div>
+                                    <!-- End Product -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PRODUCT-AREA -->
+                    </div>
+                </div>
+            </div>
+            <div class="brand-logo-area carosel-navigation" style="margin-bottom: 30px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="area-title">
+                                <h3 class="title-group border-red gfont-1">Brand Logo</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="active-brand-logo owl-carousel owl-theme" style="opacity: 1; display: block;">
+                            <div class="owl-wrapper-outer">
+                                <div class="owl-wrapper" style="width: 3510px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                    @Html.Action("BrandMenuPartial", "Shop")
+                                </div>
+                            </div>
+                            <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    @Html.Partial("_Footer")
+
+    @Html.Partial("~/Views/_Scripts.cshtml")
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

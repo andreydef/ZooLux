@@ -1,0 +1,20 @@
+﻿@model WebStore_Contrast.Models.ViewModels.Cart.CartVM
+
+@Html.Partial("~/Views/_Styles.cshtml")
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+<section class="page-content">
+    <center>
+        <div style="padding-top: 50px;"></div>
+        The content of your cart: @Model.Quantity item(s) - @Model.Price ₴
+    <div class="shopping-checkout">
+        <br />
+        <br />
+        @Html.ActionLink("Back to site", "/", "", new { @class = "btn btn-primary", @style = "margin-right: 100px;" })
+        @Html.ActionLink("Cart", "MainCart", "", new { @class = "btn btn-default" })
+    </div>
+    </center>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
