@@ -1,0 +1,211 @@
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.ProductVM>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = null;
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<title>Contrast | Products</title>
+
+@Html.Partial("~/Views/_Styles.cshtml")
+
+@Html.Partial("_Header")
+
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- CATEGORY-MENU-LIST START -->
+                <div class="left-category-menu hidden-sm hidden-xs">
+                    <div class="left-product-cat">
+                        <div class="category-heading">
+                            <h2>categories</h2>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul>
+                                <li>
+                                    @Html.Action("CategoryMenuPartial", "Shop")
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CATEGORY-MENU-LIST -->
+                <!-- filter-by start -->
+                <div class="accordion_one">
+                    <h4><a class="accordion-trigger" data-toggle="collapse" href="#divone">Features</a></h4>
+                    <div id="divone" class="collapse in">
+                        <div class="filter-menu">
+                            <ul>
+                                @Html.Action("FeaturesMenuPartial", "Shop")
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- filter-by end -->
+            </div>
+            <div class="col-md-9">
+                <!-- START PRODUCT-AREA -->
+                <div class="product-area">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- Start Product-Menu -->
+                            <div class="product-menu">
+                                <div class="product-title">
+                                    <h3 class="title-group-3 gfont-1">Products</h3>
+                                </div>
+                            </div>
+                            <!-- End Product-Menu -->
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <!-- Start Product -->
+                            <div class="product">
+                                <div class="tab-content">
+                                    <!-- Product -->
+                                    <div role="tabpanel" class="tab-pane fade in active" id="display-1-1">
+                                        <div class="row">
+                                            <div class="listview">
+                                                <!-- Start Single-Product -->
+                                                <div class="single-product">
+                                                    @foreach (var product in ViewBag.onePageOfProducts)
+                                                    {
+                                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                                            <div class="product-img">
+                                                                <a href="/shop/product-details/@product.Name">
+                                                                    @if (@product.ImageName == null)
+                                                                    {
+                                                                        <img src="/Content/img/no_image.png" style="height: 124px; margin-left: 35px;" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
+                                                                    }
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-9 col-sm-8 col-xs-12" style="margin-bottom: 20px;">
+                                                            <div class="product-description">
+                                                                <h5>@product.Name</h5>
+                                                                <div class="price-box">
+                                                                    <span class="price">@product.Price</span>
+                                                                </div>
+                                                                <p class="description">@Html.Raw(@product.Description)</p>
+                                                                <div class="product-action">
+                                                                    <div class="button-group">
+                                                                        <div class="product-button">
+                                                                            @if (User.IsInRole("User"))
+                                                                            {
+                                                                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa", @rel = "modal:open" })
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa" })
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <!-- End Single-Product -->
+                                            </div>
+                                        </div>
+                                        <!-- Start Pagination Area -->
+                                        <div class="pagination-area">
+                                            @Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+                                        </div>
+                                        <!-- End Pagination Area -->
+                                    </div>
+                                    <!-- End Product -->
+                                </div>
+                            </div>
+                            <!-- End Product -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PRODUCT-AREA -->
+            </div>
+        </div>
+    </div>
+    <!-- START BRAND-LOGO-AREA -->
+    <div class="brand-logo-area carosel-navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="area-title">
+                        <h3 class="title-group border-red gfont-1">Brand Logo</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="active-brand-logo owl-carousel owl-theme" style="opacity: 1; display: block;">
+                    <div class="owl-wrapper-outer">
+                        <div class="owl-wrapper" style="width: 3510px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                            @foreach (var brand in ViewBag.onePageOfBrands)
+                            {
+                                <div class="owl-item" style="width: 195px;">
+                                    <div class="col-md-2 row-cols-2">
+                                        <a href="/shop/Brands">
+                                            @if (brand.ImageName == null)
+                                            {
+                                                <img src="/Content/img/no_image.png" style="height: 67px; margin-left: 45px;" />
+                                            }
+                                            else
+                                            {
+                                                <img src="/Images/Uploads/Brands/@brand.Id/Thumbs/@brand.ImageName" />
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END BRAND-LOGO-AREA -->
+    <!-- START SUBSCRIBE-AREA -->
+    <div class="subscribe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                    <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                    <div class="subscribe">
+                        <form action="#">
+                            <input type="text" placeholder="Enter Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="social-media">
+                        <a href="#"><i class="fa fa-facebook fb"></i></a>
+                        <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                        <a href="#"><i class="fa fa-twitter tt"></i></a>
+                        <a href="#"><i class="fa fa-youtube yt"></i></a>
+                        <a href="#"><i class="fa fa-linkedin li"></i></a>
+                        <a href="#"><i class="fa fa-rss rs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SUBSCRIBE-AREA -->
+</section>
+
+@Html.Partial("_Footer")
+
+@Html.Partial("~/Views/_Scripts.cshtml")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
