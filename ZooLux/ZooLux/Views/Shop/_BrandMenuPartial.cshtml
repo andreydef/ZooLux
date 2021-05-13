@@ -1,0 +1,15 @@
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.BrandsVM>
+
+@foreach (var item in Model)
+{
+    <a href="/shop/Brands">
+        @if (@item.ImageName == null)
+        {
+        <img src="/Content/img/no_image.png" style="height: 67px; margin-left: 45px;" />
+        }
+        else
+        {
+        <img src="/Images/Uploads/Brands/@item.Id/Thumbs/@item.ImageName" />
+        }
+    </a>
+}

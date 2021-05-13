@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.ProductVM>
+
+@foreach (var item in Model)
+{
+    <div class="col" style="margin-bottom: 20px;">
+        <div class="product-img">
+            <a href="/shop/product-details/@item.Name">
+                @if (@item.ImageName == null)
+                {
+                    <img src="/Content/img/no_image.png" style="width: 80px; height: 80px;" />
+                }
+                else
+                {
+                    <img src="/Images/Uploads/Products/@item.Id/Thumbs/@item.ImageName" style="width: 80px; height: 80px;" />
+                }
+            </a>
+        </div>
+        <div class="product-description">
+            <h6>@item.Name</h6>
+            <div class="price-box">
+                <span class="price">@item.Price</span>
+            </div>
+            <span class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </span>
+        </div>
+    </div>
+}

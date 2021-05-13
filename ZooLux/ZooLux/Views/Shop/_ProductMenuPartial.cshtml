@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.ProductVM>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="product-img">
+                <a href="/shop/product-details/@item.Name">
+                    @if (@item.ImageName == null)
+                    {
+                        <img src="/Content/img/no_image.png" style="height: 124px; margin-left: 30px;" />
+                    }
+                    else
+                    {
+                        <img src="/Images/Uploads/Products/@item.Id/Thumbs/@item.ImageName" />
+                    }
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-8 col-xs-12" style="margin-bottom: 20px;">
+            <div class="product-description">
+                <h5>@item.Name</h5>
+                <div class="price-box">
+                    <span class="price">@item.Price</span>
+                </div>
+                <p class="description">@Html.Raw(@item.Description)</p>
+                <div class="product-action">
+                    <div class="button-group">
+                        <div class="product-button">
+                            @if (User.IsInRole("User"))
+                            {
+                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @item.Id }, new { @class = "addtocart toch-button toch-add-cart fa", @rel = "modal:open" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @item.Id }, new { @class = "addtocart toch-button toch-add-cart fa" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row" style="margin-bottom: 20px;">
+    <!-- Start Pagination Area -->
+    <div class="pagination-area">
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="pagination">
+                    <ul>
+                        @Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Pagination Area -->
+</div>
+
+@Html.Partial("~/Views/_Scripts.cshtml")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>

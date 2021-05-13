@@ -1,0 +1,177 @@
+﻿@model WebStore_Contrast.Models.ViewModels.Shop.ProductVM
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = null;
+}
+
+<title>Product @Model.Name</title>
+
+@Html.Partial("~/Views/_Styles.cshtml")
+
+@Html.Partial("_Header")
+
+<section class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- CATEGORY-MENU-LIST START -->
+                <div class="left-category-menu hidden-sm hidden-xs">
+                    <div class="left-product-cat">
+                        <div class="category-heading">
+                            <h2>categories</h2>
+                        </div>
+                        <div class="category-menu-list">
+                            <ul>
+                                <li>
+                                    @Html.Action("CategoryMenuPartial", "Shop")
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CATEGORY-MENU-LIST -->
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <!-- Start Toch-Prond-Area -->
+                <div class="toch-prond-area">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="tab-content">
+                                <!-- Product = display -->
+                                <div role="tabpanel" class="tab-pane fade in active" id="display-1">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <div class="toch-photo">
+                                                <a href="/shop/product-details/@Model.Name">
+                                                    @if (@Model.ImageName == null)
+                                                    {
+                                                        <img src="/Content/img/no_image.png" style="height: 132px; margin-left: 35px;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="/Images/Uploads/Products/@Model.Id/Thumbs/@Model.ImageName" style="margin-left: 3px;" />
+                                                    }
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <h2 class="title-product">@Model.Name</h2>
+                            <h5 class="product-category">@Model.CategoryName</h5>
+                            <div class="about-toch-prond">
+                                <hr>
+                                <p class="short-description">@Html.Raw(@Model.Description)</p>
+                                <hr>
+                                <span class="current-price">$@Model.Price</span>
+                            </div>
+                            <div class="about-product">
+                            </div>
+                            <div class="product-quantity">
+                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @Model.Id }, new { @class = "addtocart btn toch-button toch-add-cart" })
+                                <button type="submit" class="toch-button toch-wishlist">wishlist</button>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start Toch-Box -->
+                    <div class="toch-box">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <!-- Start Toch-Menu -->
+                                <div class="toch-menu">
+                                    <ul role="tablist">
+                                        <li role="presentation" class=" active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Toch-Menu -->
+                                <div class="tab-content toch-description-review">
+                                    <!-- Start display-description -->
+                                    <div role="tabpanel" class="tab-pane fade in active" id="description">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="toch-description">
+                                                    <p>@Html.Raw(@Model.Description)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End display-description -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 50px;">
+                            <br>
+                            <h3>Product Gallery</h3>
+                            <br>
+                            <div class="col-sm-12 fancyboxdiv">
+                                @foreach (var item in Model.GalleryImages)
+                                {
+                                    <a class="fancybox" rel="gallery1" href="/Images/Uploads/Products/@Model.Id/Gallery/@item">
+                                        <img src="/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@item" />
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Toch-Box -->
+                </div>
+                <!-- End Toch-Prond-Area -->
+            </div>
+        </div>
+    </div>
+    <!-- START SUBSCRIBE-AREA -->
+    <div class="subscribe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                    <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                    <div class="subscribe">
+                        <form action="#">
+                            <input type="text" placeholder="Enter Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="social-media">
+                        <a href="#"><i class="fa fa-facebook fb"></i></a>
+                        <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                        <a href="#"><i class="fa fa-twitter tt"></i></a>
+                        <a href="#"><i class="fa fa-youtube yt"></i></a>
+                        <a href="#"><i class="fa fa-linkedin li"></i></a>
+                        <a href="#"><i class="fa fa-rss rs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SUBSCRIBE-AREA -->
+</section>
+
+@Html.Partial("_Footer")
+
+@Html.Partial("~/Views/_Scripts.cshtml")
+
+<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.fancybox.js"></script>
+<script src="~/Content/ShopJS/ProductDetailsScript.js"></script>
+
+
+<script>
+    /********************Add to cart*********************/
+    $(function () {
+       $("a.addtocart").click(function (e) {
+          e.preventDefault();
+
+          var url = "/cart/AddToCartPartial";
+
+          $.get(url, { id: @Model.Id}, function myfunction(data) {
+            $(".ajaxcart").html(data);
+          });
+       });
+    });
+</script>
